@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mbruagaudis.github.io/appcn-aiyouxi-com-cn/sitemap.xml

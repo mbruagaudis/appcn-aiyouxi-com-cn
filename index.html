@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱游戏 · 简明指南与访问提醒</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f4f6;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #2c3e50;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* hero 区域 — 克制、清晰 */
+    .hero {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e6eaef;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: #1a2634;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      color: #4f5d6b;
+      max-width: 560px;
+      margin: 0 auto 1.2rem auto;
+    }
+
+    .hero .tagline {
+      display: inline-block;
+      background: #f0f3f7;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      color: #3a4a5a;
+      border: 1px solid #dadfe6;
+    }
+
+    /* 卡片通用设计 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e2e7ed;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: #1f2b38;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card h2::before {
+      content: "◆";
+      font-size: 1rem;
+      color: #788da0;
+      margin-right: 0.25rem;
+    }
+
+    .card ul, .card p {
+      font-size: 1rem;
+      color: #33414f;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card ul li {
+      padding: 0.4rem 0 0.4rem 1.5rem;
+      position: relative;
+    }
+
+    .card ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: #8b9baa;
+    }
+
+    .highlight-box {
+      background: #f8fafc;
+      border-left: 4px solid #9aacbd;
+      padding: 1rem 1.4rem;
+      border-radius: 12px;
+      margin: 1rem 0 0 0;
+      font-size: 0.95rem;
+      color: #2d3c4b;
+    }
+
+    .faq-item {
+      margin-bottom: 1.2rem;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #1f2c3a;
+      margin-bottom: 0.15rem;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: #405160;
+    }
+
+    .link-sentence {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.5rem 2rem;
+      border: 1px solid #e2e7ed;
+      margin-top: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .link-sentence p {
+      font-size: 1.05rem;
+      color: #2b3b4b;
+    }
+
+    .link-sentence a {
+      color: #2b5f7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #bccbd8;
+      padding-bottom: 2px;
+    }
+
+    .link-sentence a:hover {
+      border-bottom-color: #2b5f7a;
+    }
+
+    .footnote {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7a8b9c;
+      margin-top: 2.8rem;
+      border-top: 1px solid #dce1e8;
+      padding-top: 1.8rem;
+    }
+
+    /* 响应式 */
+    @media (min-width: 600px) {
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .card.full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+      .card {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- hero 摘要 -->
+  <div class="hero">
+    <h1>简明指南 · 爱游戏</h1>
+    <p class="sub">一份关于使用与访问的整理笔记，不夸张、不诱导，只讲实在信息。</p>
+    <span class="tagline">✦ 产品说明 · 访问提醒</span>
+  </div>
+
+  <!-- 卡片网格：亮点 + 场景/建议 -->
+  <div class="card-grid">
+
+    <!-- 亮点卡片 -->
+    <div class="card">
+      <h2>亮点速览</h2>
+      <ul>
+        <li>界面简洁，主要操作路径直观</li>
+        <li>内容分类清晰，方便按兴趣筛选</li>
+        <li>无需复杂注册，基础功能门槛较低</li>
+        <li>日常更新，保持内容时效性</li>
+      </ul>
+      <div class="highlight-box">
+        ⚡ 建议先浏览分类导航，再根据个人偏好深入探索。
+      </div>
+    </div>
+
+    <!-- 使用建议卡片 -->
+    <div class="card">
+      <h2>使用建议</h2>
+      <ul>
+        <li>首次使用可先了解整体板块结构</li>
+        <li>结合自身需求选择感兴趣的部分</li>
+        <li>注意网络环境，保持连接稳定</li>
+        <li>适当控制单次使用时长，合理安排节奏</li>
+      </ul>
+      <div class="highlight-box">
+        📌 若有功能疑问，可留意页面内的说明文字或常见问题区域。
+      </div>
+    </div>
+
+    <!-- 场景参考 —— 占满一行 -->
+    <div class="card full">
+      <h2>适用场景参考</h2>
+      <p>日常休闲、短时间放松、内容浏览、信息获取。不设定绝对使用方式，完全取决于个人偏好。以下是一些常见场景：</p>
+      <ul style="margin-top: 0.6rem;">
+        <li>午间或晚间碎片时间，快速浏览感兴趣的主题</li>
+        <li>想了解新鲜内容时，按分类筛选感兴趣的方向</li>
+        <li>作为日常信息获取的补充渠道之一</li>
+      </ul>
+      <p style="margin-top: 0.8rem; color: #4b5d6d;">不需要刻意安排，按照自己的节奏即可。</p>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <div class="card full">
+      <h2>常见问题摘要</h2>
+      <div class="faq-item">
+        <strong>Q：是否需要付费？</strong>
+        <p>目前基础使用不涉及强制付费，具体以页面实际说明为准。</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q：内容更新频率如何？</strong>
+        <p>保持日常更新，但具体时间不固定，可关注内容区域的更新时间标记。</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q：遇到页面显示异常怎么办？</strong>
+        <p>建议先检查网络连接，或尝试刷新页面。若持续异常，可稍后再试。</p>
+      </div>
+    </div>
+
+  </div><!-- end card-grid -->
+
+  <!-- 可信任且克制的访问说明 —— 嵌入链接 -->
+  <div class="link-sentence">
+    <p>如果你希望进一步了解或直接使用，可以前往 <a href="https://appcn-aiyouxi.com.cn">爱游戏</a> 查看具体内容。页面结构清晰，适合按需浏览。</p>
+  </div>
+
+  <!-- 底注 -->
+  <div class="footnote">
+    <p>本页为产品说明式介绍，内容基于公开信息整理。请根据个人判断合理使用。</p>
+  </div>
+
+</div>
+</body>
+</html>
