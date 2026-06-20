@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星空体育app · 运动信息聚合平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f4f6fa;
+            color: #1e2b3c;
+            line-height: 1.6;
+        }
+
+        /* 深色头图区 */
+        .hero {
+            background: linear-gradient(145deg, #0b1422 0%, #121e33 100%);
+            color: #e3eaf3;
+            padding: 4rem 2rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: 20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 143, 255, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 680px;
+            margin: 0 auto 0.5rem;
+            color: #b8c9e0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .sub {
+            font-size: 1.05rem;
+            color: #9baec7;
+            margin-top: 0.6rem;
+        }
+
+        /* 浅色正文区容器 */
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 2.5rem 1.2rem 4rem;
+        }
+
+        /* 信息卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 1.6rem 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 20, 40, 0.06);
+            transition: transform 0.2s, box-shadow 0.25s;
+            border: 1px solid rgba(211, 222, 235, 0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(31, 60, 105, 0.08);
+        }
+
+        .card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0f1e2f;
+        }
+
+        .card p {
+            color: #34495e;
+            font-size: 0.98rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* 强调色链接 */
+        a {
+            color: #2b6ef0;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.15s;
+        }
+
+        a:hover {
+            color: #1a4db0;
+            border-bottom-color: #2b6ef0;
+        }
+
+        .link-embed {
+            margin-top: 1.2rem;
+            display: inline-block;
+        }
+
+        /* 内容区块 - 适合人群 / 自然段落 */
+        .section-block {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e2eaf2;
+        }
+
+        .section-block h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #0a1a2b;
+            border-left: 5px solid #2b6ef0;
+            padding-left: 1rem;
+        }
+
+        .section-block p {
+            margin-bottom: 1.2rem;
+            color: #2c3e50;
+        }
+
+        .section-block ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.6rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .section-block li {
+            position: relative;
+            padding-left: 1.2rem;
+            color: #1c2d3f;
+        }
+
+        .section-block li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #2b6ef0;
+            font-size: 0.8rem;
+        }
+
+        .faq-mini {
+            background: #fafcff;
+            border-radius: 20px;
+            padding: 1.6rem 2rem;
+            margin-top: 1.8rem;
+            border: 1px solid #dae3ef;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.6rem;
+        }
+
+        .faq-mini summary {
+            font-weight: 600;
+            cursor: pointer;
+            color: #1a2c40;
+            padding: 0.3rem 0;
+        }
+
+        .faq-mini details p {
+            margin: 0.4rem 0 0.8rem 1rem;
+            color: #3a4d62;
+        }
+
+        /* 响应式 */
+        @media (max-width: 700px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1.8rem 1rem 3rem;
+            }
+
+            .section-block {
+                padding: 1.5rem;
+            }
+
+            .card-grid {
+                gap: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 2.8rem 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+        }
+
+        /* 脚注 */
+        .footer-note {
+            text-align: center;
+            margin-top: 2.8rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #d6e0eb;
+            color: #63778a;
+            font-size: 0.94rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色主视觉 -->
+    <header class="hero">
+        <h1>星空体育app · 运动信息整合</h1>
+        <p>将体育数据、赛事观察与运动知识汇聚于一处，呈现立体化的运动视野。</p>
+        <div class="sub">从实时资讯到深度内容，重新理解体育世界</div>
+    </header>
+
+    <!-- 正文区：信息卡片 + 自然段落 -->
+    <main class="container">
+
+        <!-- 用途卡片区 -->
+        <div class="card-grid">
+            <div class="card">
+                <div class="icon">📊</div>
+                <h3>赛事信息面板</h3>
+                <p>多联赛数据、赛程与统计信息聚合，方便快速定位重点比赛与队伍动态。</p>
+            </div>
+            <div class="card">
+                <div class="icon">📰</div>
+                <h3>运动内容索引</h3>
+                <p>涵盖项目科普、技术解析与趋势讨论，从规则到战术层层拆解。</p>
+            </div>
+            <div class="card">
+                <div class="icon">🧭</div>
+                <h3>发现与追踪</h3>
+                <p>根据兴趣筛选项目、联赛或运动员，持续关注自己热爱的运动领域。</p>
+            </div>
+        </div>
+
+        <!-- 适合人群 + 自然链接段落 -->
+        <div class="section-block">
+            <h2>适合哪些运动爱好者？</h2>
+            <p>无论你长期关注某个联赛，还是刚刚开始对体育产生兴趣，<strong>星空体育app</strong> 所整合的内容结构都能帮助你逐步建立知识脉络。对于希望深入理解比赛战术、队伍历史以及运动科学的朋友，平台上提供的信息卡片与索引模块可以作为不错的起点。同时，这里也适合那些喜欢在碎片时间里浏览体育快讯、了解不同运动项目背景的人。</p>
+            <ul>
+                <li>赛事规律与数据分析爱好者</li>
+                <li>希望拓展运动知识边界的读者</li>
+                <li>需要快速获取赛程与简报的活跃观众</li>
+            </ul>
+            <p>如果你想从更系统的角度接触体育内容，不妨直接了解 <a href="https://new-starsportsapp.com">星空体育app</a> 所构建的信息呈现方式。平台将碎片化的运动信息重新组织为可浏览、可比较的知识单元。</p>
+        </div>
+
+        <!-- 场景与提示（知识型承接） -->
+        <div class="section-block">
+            <h2>常见使用场景</h2>
+            <p>体育比赛的节奏快，信息量大。很多爱好者希望在看球之余，也能快速回顾数据、对比不同赛季的表现。此时，一个结构清晰的信息平台能节省大量搜索时间。另外，在尝试了解某项小众运动（如橄榄球、冰壶、手球）时，基础规则与赛事体系的介绍往往分布零散。<strong>星空体育app</strong> 尝试将这些分散的内容以卡片和分类形式集中展示，降低信息获取门槛。</p>
+            <p>对于教练、体育专业学生或内容创作者而言，平台提供的结构化信息也适合作为素材索引。你可以在了解基本框架后，再深入查找原始资料或官方数据。</p>
+        </div>
+
+        <!-- FAQ摘要 (轻量) -->
+        <div class="faq-mini">
+            <details>
+                <summary>星空体育app 主要覆盖哪些运动项目？</summary>
+                <p>目前涵盖足球、篮球、网球、橄榄球、冰球、棒球等主流职业联赛，同时逐步加入田径、游泳、综合格斗等项目的赛事信息与科普内容。具体项目范围可以在平台内自行浏览。</p>
+            </details>
+            <details>
+                <summary>内容更新频率如何？</summary>
+                <p>赛事相关信息会根据官方赛程与实时数据动态更新；背景知识与专题内容会定期补充，通常保持每周数次迭代，确保信息的时效性与准确性。</p>
+            </details>
+            <details>
+                <summary>是否需要注册才能浏览？</summary>
+                <p>大部分信息卡片与索引内容可直接浏览，部分个性化追踪功能建议注册后使用，但浏览核心知识内容并无强制门槛。具体可查看平台说明。</p>
+            </details>
+        </div>
+
+        <!-- 自然结尾 -->
+        <div class="footer-note">
+            <span>持续梳理体育信息，以知识视角看运动世界。</span>
+        </div>
+
+    </main>
+
+</body>
+</html>
