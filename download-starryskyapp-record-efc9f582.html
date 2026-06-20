@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>星空体育app · 杂志专题</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+      background: linear-gradient(165deg, #f5faf8 0%, #e9f3f0 100%);
+      color: #1d2f2b;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2rem 1.2rem;
+    }
+
+    .magazine-wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 48px 48px 36px 36px;
+      box-shadow: 0 12px 40px rgba(0, 40, 30, 0.08);
+      overflow: hidden;
+      padding: 2rem 1.8rem 3rem;
+    }
+
+    /* 首页横幅 — 杂志头条 */
+    .hero-banner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2.5rem 1rem;
+      margin-bottom: 3.6rem;
+    }
+
+    .hero-text {
+      flex: 2 1 300px;
+    }
+
+    .hero-text .section-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #2a7a6b;
+      background: rgba(42, 122, 107, 0.12);
+      padding: 0.3rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .hero-text h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #10352d;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-text h1 span {
+      display: inline-block;
+      background: linear-gradient(135deg, #1b7a6b, #3aaa98);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-text .hero-sub {
+      font-size: 1.05rem;
+      color: #2f4f48;
+      max-width: 480px;
+      border-left: 4px solid #3aaa98;
+      padding-left: 1.2rem;
+      margin-top: 0.2rem;
+    }
+
+    .hero-visual {
+      flex: 1 1 180px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-visual .icon-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 140px;
+      height: 140px;
+    }
+
+    .hero-visual .icon-grid div {
+      background: linear-gradient(145deg, #cdebe3, #b1ddd2);
+      border-radius: 20px;
+      box-shadow: 0 6px 12px rgba(27, 122, 107, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .hero-visual .icon-grid div:nth-child(1) { background: #3aaa98; }
+    .hero-visual .icon-grid div:nth-child(2) { background: #56c4b0; }
+    .hero-visual .icon-grid div:nth-child(3) { background: #72cfbf; }
+    .hero-visual .icon-grid div:nth-child(4) { background: #8fd9cc; }
+
+    /* 背景说明卡片 */
+    .background-card {
+      background: #ffffffd9;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      border-radius: 30px;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.8rem;
+      box-shadow: 0 4px 20px rgba(0, 30, 20, 0.04);
+      border: 1px solid rgba(58, 170, 152, 0.15);
+    }
+
+    .background-card h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #0b3f36;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .background-card h2::before {
+      content: "✦";
+      color: #2a7a6b;
+      font-size: 1.2rem;
+    }
+
+    .background-card p {
+      color: #26413a;
+      font-size: 1rem;
+    }
+
+    /* 三段自然介绍 — 网格卡片 */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin: 2.8rem 0 2.2rem;
+    }
+
+    .feature-card {
+      background: #ffffffec;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      border-radius: 28px;
+      padding: 1.8rem 1.4rem 1.6rem;
+      border: 1px solid rgba(58, 170, 152, 0.2);
+      box-shadow: 0 6px 16px -4px rgba(27, 122, 107, 0.06);
+      transition: all 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: #3aaa98;
+      box-shadow: 0 12px 24px -8px rgba(27, 122, 107, 0.12);
+    }
+
+    .feature-card .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #10352d;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #2f4f48;
+    }
+
+    /* 页尾访问提示 & FAQ 摘要 */
+    .footer-note {
+      margin-top: 2.8rem;
+      border-top: 1px solid rgba(42, 122, 107, 0.15);
+      padding-top: 2.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .faq-summary {
+      flex: 2 1 260px;
+      background: #ecf7f3;
+      border-radius: 24px;
+      padding: 1.4rem 1.6rem;
+    }
+
+    .faq-summary h4 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #0b3f36;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .faq-summary ul {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .faq-summary li {
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed rgba(42, 122, 107, 0.2);
+      color: #1c423b;
+    }
+
+    .faq-summary li:last-child {
+      border-bottom: none;
+    }
+
+    .faq-summary li::before {
+      content: "▹ ";
+      color: #3aaa98;
+    }
+
+    .visit-prompt {
+      flex: 1 1 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #ffffffd9;
+      border-radius: 24px;
+      padding: 1.5rem 1.4rem;
+      text-align: center;
+      border: 1px solid rgba(58, 170, 152, 0.2);
+    }
+
+    .visit-prompt p {
+      font-size: 0.95rem;
+      color: #1f4b42;
+      margin-bottom: 0.8rem;
+    }
+
+    .visit-prompt a {
+      display: inline-block;
+      background: #1b7a6b;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 60px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 4px 10px rgba(27, 122, 107, 0.2);
+    }
+
+    .visit-prompt a:hover {
+      background: #0f5f52;
+      transform: scale(1.02);
+    }
+
+    .visit-prompt .hint {
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
+      color: #3f6b61;
+    }
+
+    /* 响应式细节 */
+    @media (max-width: 680px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+
+      .magazine-wrapper {
+        padding: 1.5rem 1rem 2.2rem;
+        border-radius: 32px;
+      }
+
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+
+      .hero-text .hero-sub {
+        font-size: 0.95rem;
+        padding-left: 0.8rem;
+      }
+
+      .hero-visual .icon-grid {
+        width: 110px;
+        height: 110px;
+      }
+
+      .background-card {
+        padding: 1.2rem 1.2rem;
+      }
+
+      .features-grid {
+        gap: 1.2rem;
+      }
+
+      .feature-card {
+        padding: 1.2rem 1rem;
+      }
+
+      .footer-note {
+        flex-direction: column;
+      }
+
+      .visit-prompt a {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .hero-banner {
+        gap: 1.2rem;
+      }
+
+      .hero-text h1 {
+        font-size: 1.6rem;
+      }
+
+      .hero-visual .icon-grid {
+        width: 90px;
+        height: 90px;
+        gap: 5px;
+      }
+
+      .hero-visual .icon-grid div {
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="magazine-wrapper">
+    
+    <!-- 首页横幅 hero -->
+    <div class="hero-banner">
+      <div class="hero-text">
+        <span class="section-tag">✦ 运动视野 · 2025</span>
+        <h1>当夜色铺展，<br>我们望向<span>同一片星河</span></h1>
+        <div class="hero-sub">
+          从赛事分析到爱好者社群，<br>数字工具正在重塑观赛与参与的边界。
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="icon-grid">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 背景说明 -->
+    <div class="background-card">
+      <h2>从数据到体验：运动场景的数字化迁移</h2>
+      <p>
+        过去十年，体育迷的观看方式经历了从电视转播到多屏互动的跃迁。移动应用不仅承载着即时比分与赛程，更成为连接球队、运动员和用户之间的文化节点。<a href="https://download-starryskyapp.com" style="color: #1b7a6b; text-decoration: underline; text-underline-offset: 3px; font-weight: 500;">星空体育app</a> 正是在这一背景下被设计——它不只是一个信息聚合器，而是一套围绕体育内容理解、社交互动与个性化推荐构建的轻量生态。
+      </p>
+    </div>
+
+    <!-- 三段自然介绍（网格卡片） -->
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="card-icon">📊</span>
+        <h3>多维数据可视化</h3>
+        <p>将复杂的比赛统计转化为直观的图表与动态趋势线，帮助爱好者快速把握球队节奏与球员效率。从控球率到预期进球，数据不再是冰冷数字。</p>
+      </div>
+      <div class="feature-card">
+        <span class="card-icon">🌐</span>
+        <h3>社区讨论与内容流</h3>
+        <p>基于兴趣的话题板块和即时讨论功能，让用户能够在赛事进行时交流观点。内容流算法尊重时间线与多样性，不单纯追逐热度。</p>
+      </div>
+      <div class="feature-card">
+        <span class="card-icon">🎯</span>
+        <h3>个性化赛事追踪</h3>
+        <p>支持自定义关注联赛、球队或特定运动员。推送策略克制而及时：不错过关键进球或重要转会，也避免过度干扰日常节奏。</p>
+      </div>
+    </div>
+
+    <!-- 页尾访问提示 + FAQ 摘要 -->
+    <div class="footer-note">
+      <div class="faq-summary">
+        <h4>常见问题 · 摘要</h4>
+        <ul>
+          <li>支持 iOS 与 Android 双平台，安装包经过常规安全检测。</li>
+          <li>基础功能免费，高级数据模块可通过订阅解锁。</li>
+          <li>社区内容由用户生成，平台遵循内容规范与隐私保护原则。</li>
+          <li>赛事数据来源包括官方接口与授权合作方，更新延迟一般在 30 秒内。</li>
+        </ul>
+      </div>
+      <div class="visit-prompt">
+        <p>探索运动世界的另一种方式</p>
+        <a href="https://download-starryskyapp.com">星空体育app</a>
+        <div class="hint">当前版本 2.6 · 持续迭代中</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
