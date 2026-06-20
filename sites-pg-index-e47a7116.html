@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息卡片 | 围绕主题的轻量介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: linear-gradient(145deg, #fce3c8 0%, #f8d5b0 45%, #f0c49a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+            color: #3d2b1a;
+        }
+
+        .page-wrap {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* 主视觉卡片 */
+        .hero-card {
+            background: white;
+            border-radius: 32px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 20px 40px -12px rgba(120, 70, 30, 0.25);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .hero-text {
+            flex: 2 1 280px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #a5582c, #c47a4b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.15rem;
+            color: #5a4231;
+            max-width: 480px;
+        }
+
+        .hero-visual {
+            flex: 1 1 180px;
+            background: #f1ddd0;
+            border-radius: 24px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            color: #b1794e;
+            background-image: radial-gradient(circle at 30% 40%, #f3e3d6 0%, #e7cdb8 100%);
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        /* 信息卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 12px 28px -10px rgba(80, 50, 20, 0.14);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 36px -12px rgba(80, 50, 20, 0.18);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            font-weight: 550;
+            color: #4e3321;
+            margin-bottom: 0.75rem;
+            border-bottom: 2px solid #f5e3d4;
+            padding-bottom: 0.4rem;
+        }
+
+        .card p {
+            color: #4f3a2a;
+            font-size: 0.98rem;
+            margin-bottom: 0.5rem;
+            flex: 1;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: #f5ebe3;
+            border-radius: 100px;
+            padding: 0.2rem 1rem;
+            font-size: 0.8rem;
+            color: #7c5c43;
+            margin-top: 0.7rem;
+            align-self: flex-start;
+        }
+
+        /* 嵌入链接的自然段落块 */
+        .link-block {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 12px 28px -10px rgba(80, 50, 20, 0.14);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem 2.5rem;
+            align-items: center;
+        }
+
+        .link-block p {
+            flex: 3 1 240px;
+            color: #3d2b1a;
+            font-size: 1.04rem;
+        }
+
+        .link-block a {
+            display: inline-block;
+            background: #e7cfbb;
+            color: #3b271a;
+            text-decoration: none;
+            padding: 0.65rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            white-space: nowrap;
+        }
+
+        .link-block a:hover {
+            background: #dbbca3;
+            box-shadow: 0 4px 12px rgba(130, 70, 30, 0.18);
+        }
+
+        /* 摘要 / 提示 */
+        .faq-note {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 8px 20px -8px rgba(60, 30, 10, 0.10);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .faq-note h2 {
+            font-size: 1.2rem;
+            font-weight: 550;
+            color: #4e3321;
+        }
+
+        .faq-note p {
+            color: #4c3828;
+            font-size: 0.96rem;
+        }
+
+        .faq-note summary {
+            cursor: pointer;
+            font-weight: 500;
+            color: #6f4f39;
+            padding: 0.3rem 0;
+        }
+
+        .faq-note details {
+            border-left: 3px solid #eddacb;
+            padding-left: 1rem;
+            margin-top: 0.3rem;
+        }
+
+        .faq-note details p {
+            margin-top: 0.3rem;
+            color: #5c4534;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #edd7c7;
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .link-block {
+                padding: 1.5rem 1.5rem;
+            }
+            .link-block a {
+                white-space: normal;
+                width: 100%;
+                text-align: center;
+            }
+            .faq-note {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 主视觉卡片 -->
+    <div class="hero-card">
+        <div class="hero-text">
+            <h1>围绕主题的卡片式叙述</h1>
+            <p>从关键词延伸出温和的用途脉络，让浏览者自然了解内容方向与适用场景。</p>
+        </div>
+        <div class="hero-visual">
+            ◇ ◆ ◇
+        </div>
+    </div>
+
+    <!-- 信息卡片网格：用途 + 人群 + 场景 -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">📋</div>
+            <h3>常见用途</h3>
+            <p>适合作为信息聚合页、轻量项目介绍或主题索引。卡片结构让每个模块独立又连贯。</p>
+            <span class="card-tag">结构清晰</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">👤</div>
+            <h3>适合人群</h3>
+            <p>内容创作者、个人兴趣站运营者、小团队项目展示。不追求复杂交互，侧重阅读体验。</p>
+            <span class="card-tag">温和表达</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">🌱</div>
+            <h3>场景参考</h3>
+            <p>个人知识笔记、爱好介绍页、轻量产品落地页。以内容为中心，不强调营销感。</p>
+            <span class="card-tag">自然叙述</span>
+        </div>
+    </div>
+
+    <!-- 自然链接段落（含 pg官网 关键 a 标签） -->
+    <div class="link-block">
+        <p>
+            如果你对这类围绕主题的卡片结构感兴趣，可以了解 <a href="https://sites-pg.com">pg官网</a> 上关于内容展示方式的更多思路。从信息组织到视觉节奏，都可以根据实际需要调整。
+        </p>
+        <p>
+            卡片式布局的优势在于灵活与克制，每个模块保持独立的同时，整体又统一在暖色调的基调下。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 / 提示卡片 -->
+    <div class="faq-note">
+        <h2>你可能想了解的</h2>
+        <details>
+            <summary>这种卡片页面适合哪些人？</summary>
+            <p>适合希望以温和方式呈现信息的人，无论是个人介绍、兴趣索引还是小型主题站。卡片让浏览者可以按需获取内容，不强迫线性阅读。</p>
+        </details>
+        <details>
+            <summary>页面风格可以调整吗？</summary>
+            <p>可以基于当前暖色渐变与白色卡片的基础，修改色调、圆角大小或卡片间距。保持内容结构的同时，视觉上可以适配不同偏好。</p>
+        </details>
+        <hr>
+        <p style="font-size:0.9rem; color:#6f5543;">提示：本页仅做内容展示示意，所有描述均为方向性参考，不构成承诺或引导。</p>
+    </div>
+
+    <!-- 一个辅助分隔，视觉上更完整 -->
+    <div style="text-align:center; font-size:0.85rem; color:#967b66; padding-top:0.5rem;">
+        —— 温和 · 卡片 · 自然 ——
+    </div>
+
+</div>
+</body>
+</html>
